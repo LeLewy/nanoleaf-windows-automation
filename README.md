@@ -9,3 +9,8 @@ Automated control of Nanoleaf panels and Overwolf on Windows:
 1. Clone or download this repository.
 2. Copy `config/config.example.json` to `config/config.json` and fill in your Nanoleaf IP and Auth Token.
 3. Open PowerShell **as Administrator** and run `.\install.ps1`.
+
+## Uninstallation
+To completely remove all scheduled tasks, background watchers, and the `C:\Scripts` folder:
+1. Open PowerShell **as Administrator**.
+2. Run `.\uninstall.ps1`.

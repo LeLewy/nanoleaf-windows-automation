@@ -1,0 +1,15 @@
+﻿{
+  "nanoleaf_ip": "192.168.1.XXX",
+  "nanoleaf_port": 16021,
+  "nanoleaf_token": "DEIN_NANOLEAF_AUTH_TOKEN",
+  "overwolf_path": "C:\\Program Files (x86)\\Overwolf\\OverwolfLauncher.exe",
+  "game_folders": [
+    "*\\steamapps\\common\\*",
+    "*\\EA Games\\*",
+    "*\\Ubisoft Game Launcher\\games\\*",
+    "*\\XboxGames\\*",
+    "*\\Riot Games\\*",
+    "*\\curseforge\\minecraft\\Install\\java\\*",
+    "*\\SteelSeries\\GG\\apps\\threeDAT\\*"
+  ]
+}

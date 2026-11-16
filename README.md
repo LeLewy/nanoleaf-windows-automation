@@ -1,9 +1,16 @@
 ﻿# Nanoleaf Windows Automation
 
-Automated control of Nanoleaf panels and Overwolf on Windows:
-- **PC Login:** Activates the configured startup scene (`nl_on.json`) silently without flashing console windows.
-- **Gaming Mode:** Launches Nanoleaf Desktop and Overwolf (`-silent`) when a game is detected, hides the Overwolf banner invisibly (`SW_HIDE`), and closes Overwolf 5 seconds after exiting the game (only if auto-started).
-- **PC Shutdown:** Turns off the panels on shutdown while keeping them on during reboots.
+Automated background control of Nanoleaf panels and Overwolf on Windows—designed to keep your setup fully automated without manual intervention.
+
+## Why use this?
+If you own Nanoleaf panels and use Overwolf while gaming, you probably know the routine: manually launching desktop apps, turning on ambient lighting scenes every time you log in, dealing with annoying promotional overlays, and remembering to turn off your lights when shutting down your PC. 
+
+This project completely automates that workflow in the background with zero resource overhead:
+- **PC Login:** Silently activates your preferred startup scene (`nl_on.json`) the moment you log into Windows, without flashing command prompt windows.
+- **Smart Gaming Mode:** Detects when you launch a game (across Steam, EA, Ubisoft, Xbox, Riot, etc.), automatically starts Nanoleaf Desktop minimized and opens Overwolf in `-silent` mode.
+- **Banner Hiding:** Automatically intercepts and hides the intrusive Overwolf promotional banner (`SW_HIDE`) the second it appears.
+- **Smart Cleanup:** Automatically closes Overwolf 5 seconds after you exit your game (only if it was auto-started by the script).
+- **PC Shutdown Control:** Turns off your Nanoleaf panels when you shut down your PC, while intelligently keeping them powered on during standard reboots.
 
 ## Installation
 1. Clone or download this repository.

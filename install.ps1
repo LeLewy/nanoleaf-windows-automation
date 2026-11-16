@@ -3,7 +3,7 @@ $targetDir = "C:\Scripts"
 $localConfig = "$PSScriptRoot\config\config.json"
 
 if (-not (Test-Path $localConfig)) {
-    Write-Error "Bitte kopiere zuerst 'config\config.example.json' nach 'config\config.json' und trage IP sowie Token ein."
+    Write-Error "Please copy 'config\config.example.json' to 'config\config.json' and enter your Nanoleaf IP and Auth Token first."
     exit 1
 }
 
@@ -25,7 +25,7 @@ Register-ScheduledTask -TaskName "Nanoleaf Master Watcher" -TaskPath "\Nanoleaf\
 
 $CIMTriggerClass = Get-CimClass -ClassName MSFT_TaskEventTrigger -Namespace Root/Microsoft/Windows/TaskScheduler
 $tShutdown = New-CimInstance -CimClass $CIMTriggerClass -ClientOnly
-$tShutdown.Subscription = "<QueryList><Query Id=`"0`" Path=`"System`"><Select Path=`"System`">*[System[Provider[@Name='User32'] and EventID=1074] and EventData[Data[@Name='param5']='Ausschalten' or Data[@Name='param5']='Herunterfahren' or Data[@Name='param5']='power off']]</Select></Query></QueryList>"
+$tShutdown.Subscription = "<QueryList><Query Id=`"0`" Path=`"System`"><Select Path=`"System`">*[System[Provider[@Name='User32'] and EventID=1074]]</Select><Suppress Path=`"System`">*[EventData[Data[@Name='param5']='restart' or Data[@Name='param5']='neu starten' or Data[@Name='param5']='redémarrer' or Data[@Name='param5']='reiniciar' or Data[@Name='param5']='riavvia']]</Suppress></Query></QueryList>"
 $tShutdown.Enabled = $true
 
 $offUri = "http://$($cfg.nanoleaf_ip):$($cfg.nanoleaf_port)/api/v1/$($cfg.nanoleaf_token)/state"
@@ -34,4 +34,4 @@ $principalOff = New-ScheduledTaskPrincipal -UserId "SYSTEM" -LogonType ServiceAc
 $settingsOff = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -ExecutionTimeLimit (New-TimeSpan -Seconds 5)
 
 Register-ScheduledTask -TaskName "NALE Turn off" -TaskPath "\Nanoleaf\" -Action $actionOff -Trigger $tShutdown -Principal $principalOff -Settings $settingsOff -Force | Out-Null
-Write-Host "Installation abgeschlossen!" -ForegroundColor Green
+Write-Host "Installation completed successfully!" -ForegroundColor Green

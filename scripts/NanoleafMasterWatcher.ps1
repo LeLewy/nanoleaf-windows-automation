@@ -15,9 +15,10 @@ $nlDesktopExe = Get-ChildItem -Path "$env:LOCALAPPDATA\Programs\Nanoleaf*", "${e
 
 $ignoreNames = @("wallpaper*", "ui32", "*Crash*", "*Report*", "*Cleanup*", "*redist*", "*DXSETUP*", "*BEService*", "*EasyAntiCheat*", "*UbisoftConnect*", "*upc*", "*EADesktop*", "*EABackground*", "*cefsharp*", "*WebHelper*", "*Launcher*", "*Updater*", "*Overlay*", "*Helper*")
 
+# Live shutdown hook (ignores reboots across OS languages)
 Register-ObjectEvent -InputObject ([Microsoft.Win32.SystemEvents]) -EventName "SessionEnding" -MessageData $apiBase -Action {
     $ev = Get-WinEvent -FilterHashtable @{LogName='System'; Id=1074} -MaxEvents 1 -ErrorAction SilentlyContinue
-    if (-not ($ev -and ($ev.Properties[4].Value -match "neu starten|restart"))) {
+    if (-not ($ev -and ($ev.Properties[4].Value -match "restart|neu starten|redémarrer|reiniciar|riavvia"))) {
         $url = "$($Event.MessageData)/state"
         curl.exe -s --connect-timeout 1 --max-time 1 -X PUT $url -H "Content-Type: application/json" -d "@C:\Scripts\nl_off.json" | Out-Null
     }

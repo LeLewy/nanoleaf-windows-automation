@@ -21,3 +21,12 @@ This project completely automates that workflow in the background with zero reso
 To completely remove all scheduled tasks, background watchers, and the `C:\Scripts` folder:
 1. Open PowerShell **as Administrator**.
 2. Run `.\uninstall.ps1`.
+
+## Troubleshooting
+**Windows prevents shutdown ("This app is preventing shutdown")?**
+Although the shutdown script is designed to forcefully close the background watcher, Windows can sometimes halt the shutdown process before the script finishes. 
+To fix this globally and ensure a seamless shutdown, open PowerShell **as Administrator** and run:
+```powershell
+New-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "AutoEndTasks" -Value "1" -PropertyType String -Force
+```
+*This is a common Windows quality-of-life tweak that tells your system to instantly close lingering background tasks without prompting you.*
